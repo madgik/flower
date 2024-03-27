@@ -1,13 +1,13 @@
-import flwr as fl
-import utils
-from sklearn.metrics import log_loss
-from sklearn.linear_model import LogisticRegression
 from typing import Dict
-import pandas as pd
+
+import flwr as fl
 import numpy as np
+import pandas as pd
 from sklearn import preprocessing
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import log_loss
 
-
+import utils
 
 
 def fit_round(server_round: int) -> Dict:
@@ -19,15 +19,15 @@ def get_evaluate_fn(model: LogisticRegression):
     """Return an evaluation function for server-side evaluation."""
 
     # Load test data here to avoid the overhead of doing it in `evaluate` itself
-    #_, (X_test, y_test) = utils.load_mnist()
+    # _, (X_test, y_test) = utils.load_mnist()
 
     xvars = ['lefthippocampus', 'leftamygdala']
     yvars = ['gender']
 
-    dataframes_list=[]
+    dataframes_list = []
 
     for i in range(10):
-        curr_filename = '/Users/aglenis/MIP-Engine/tests/test_data/dementia_v_0_1/ppmi'+str(i)+'.csv'
+        curr_filename = '../../../tests/test_data/dementia_v_0_1/ppmi' + str(i) + '.csv'
         curr_df = pd.read_csv(curr_filename)
         dataframes_list.append(curr_df)
 
@@ -36,26 +36,26 @@ def get_evaluate_fn(model: LogisticRegression):
     print(np.unique(full_data[yvars]))
 
     le = preprocessing.LabelEncoder()
-    le.fit(['M','F'])
+    le.fit(['M', 'F'])
     print(list(le.classes_))
 
     X_test = full_data[xvars].values
     y_test = le.transform(full_data[yvars].values.ravel())
-
 
     # The `evaluate` function will be called after every round
     def evaluate(server_round, parameters: fl.common.NDArrays, config):
         # Update model with the latest parameters
         utils.set_model_params(model, parameters)
         loss = log_loss(y_test, model.predict_proba(X_test))
-
-        if server_round ==5:
-                y_pred = model.predict(X_test)
-                df = pd.DataFrame()
-                df['y_pred'] = y_pred
-                df.to_csv('y_pred_'+str(0)+'_federated.csv',index=False)
-
         accuracy = model.score(X_test, y_test)
+
+        accuracy_output = {"accuracy": accuracy}
+
+        if server_round == 5:
+            import json
+            with open('result.json', 'w') as f:
+                json.dump(accuracy_output, f)
+
         return loss, {"accuracy": accuracy}
 
     return evaluate

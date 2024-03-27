@@ -1,47 +1,42 @@
+import sys
 import warnings
-import flwr as fl
 
+import flwr as fl
+import pandas as pd
+from sklearn import preprocessing
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import log_loss
 
 import utils
 
-import sys
-import pandas as pd
-
-from sklearn import preprocessing
-
 if __name__ == "__main__":
     arg_array = sys.argv
     client_nr = arg_array[1]
-    # Load MNIST dataset from https://www.openml.org/d/554
-    data_filename = '/Users/aglenis/MIP-Engine/tests/test_data/dementia_v_0_1/ppmi'+str(int(client_nr)+2)+'.csv'
+
+    data_filename = '../../../tests/test_data/dementia_v_0_1/ppmi' + str(int(client_nr) + 2) + '.csv'
     xvars = ['lefthippocampus', 'leftamygdala']
     yvars = ['gender']
-    #(X_train, y_train), (X_test, y_test) = utils.load_mnist()
-    #full_data = pd.read_csv(data_filename)
+
     if client_nr == 0:
         datasets = [i for i in range(5)]
     else:
-        datasets = [i for i in range(5,10)]
+        datasets = [i for i in range(5, 10)]
+
     dataframes_list = []
     for i in datasets:
-        curr_filename = '/Users/aglenis/MIP-Engine/tests/test_data/dementia_v_0_1/ppmi'+str(i)+'.csv'
+        curr_filename = '../../../tests/test_data/dementia_v_0_1/ppmi' + str(i) + '.csv'
         curr_df = pd.read_csv(curr_filename)
         dataframes_list.append(curr_df)
 
     full_data = pd.concat(dataframes_list)
 
     le = preprocessing.LabelEncoder()
-    le.fit(['M','F'])
+    le.fit(['M', 'F'])
 
     X_train = full_data[xvars].values
     X_test = X_train
     y_train = le.transform(full_data[yvars].values)
     y_test = y_train
-    # Split train set into 10 partitions and randomly use one for training.
-    #partition_id = np.random.choice(10)
-    #(X_train, y_train) = utils.partition(X_train, y_train, 10)[partition_id]
 
     # Create LogisticRegression Model
     model = LogisticRegression(
@@ -52,6 +47,7 @@ if __name__ == "__main__":
 
     # Setting initial parameters, akin to model.compile for keras models
     utils.set_initial_params(model)
+
 
     # Define Flower client
     class MnistClient(fl.client.NumPyClient):
@@ -72,6 +68,7 @@ if __name__ == "__main__":
             loss = log_loss(y_test, model.predict_proba(X_test))
             accuracy = model.score(X_test, y_test)
             return loss, len(X_test), {"accuracy": accuracy}
+
 
     # Start Flower client
     fl.client.start_numpy_client(server_address="0.0.0.0:8080", client=MnistClient())
