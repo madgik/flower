@@ -1,3 +1,6 @@
+import glob
+import os
+from pathlib import Path
 from typing import Dict
 
 import flwr as fl
@@ -9,6 +12,9 @@ from sklearn.metrics import log_loss
 
 import utils
 
+PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
+DATA_FOLDER = Path(PROJECT_ROOT / "tests" / "test_data" / "dementia_v_0_1")
+
 
 def fit_round(server_round: int) -> Dict:
     """Send round number to client."""
@@ -17,18 +23,12 @@ def fit_round(server_round: int) -> Dict:
 
 def get_evaluate_fn(model: LogisticRegression):
     """Return an evaluation function for server-side evaluation."""
-
-    # Load test data here to avoid the overhead of doing it in `evaluate` itself
-    # _, (X_test, y_test) = utils.load_mnist()
-
     xvars = ['lefthippocampus', 'leftamygdala']
     yvars = ['gender']
 
     dataframes_list = []
-
-    for i in range(10):
-        curr_filename = '../../../tests/test_data/dementia_v_0_1/ppmi' + str(i) + '.csv'
-        curr_df = pd.read_csv(curr_filename)
+    for file in glob.glob(os.path.join(DATA_FOLDER / "ppmi*.csv")):
+        curr_df = pd.read_csv(file)
         dataframes_list.append(curr_df)
 
     full_data = pd.concat(dataframes_list)
@@ -50,10 +50,11 @@ def get_evaluate_fn(model: LogisticRegression):
         accuracy = model.score(X_test, y_test)
 
         accuracy_output = {"accuracy": accuracy}
+        print(accuracy_output)
 
         if server_round == 5:
             import json
-            with open('result.json', 'w') as f:
+            with open(PROJECT_ROOT / "flower" / "algorithms" / "result.json", "w+") as f:
                 json.dump(accuracy_output, f)
 
         return loss, {"accuracy": accuracy}

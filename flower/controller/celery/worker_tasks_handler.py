@@ -1,15 +1,14 @@
 import logging
 from typing import Final
-from typing import List
 
-from flower.central_node.celery.app import CeleryAppFactory
+from flower.controller.celery.app import CeleryAppFactory
 
 TASK_SIGNATURES: Final = {
-    "print_hello": "flower.worker.celery_tasks.tasks.print_hello",
+    "start_flower_client": "flower.worker.celery_tasks.client.start_flower_client",
 }
 
 
-class NodeAlgorithmTasksHandler:
+class WorkerTasksHandler:
     def __init__(
         self,
         port: str,
@@ -20,15 +19,15 @@ class NodeAlgorithmTasksHandler:
     def _get_node_celery_app(self):
         return CeleryAppFactory().get_celery_app(socket_addr=f"172.17.0.1:{self.port}")
 
-    def print_hello(self) -> List[str]:
+    def start_flower_client(self):
         logger = get_logger()
         celery_app = self._get_node_celery_app()
-        task_signature = TASK_SIGNATURES["print_hello"]
-        result = celery_app.get(
+        task_signature = TASK_SIGNATURES["start_flower_client"]
+        celery_app.get(
             task_signature=task_signature,
             logger=logger,
         )
-        return list(result)
+
 
 def get_logger():
     logger = logging.getLogger("FLOWER")

@@ -1,5 +1,8 @@
+import glob
+import os.path
 import sys
 import warnings
+from pathlib import Path
 
 import flwr as fl
 import pandas as pd
@@ -9,23 +12,16 @@ from sklearn.metrics import log_loss
 
 import utils
 
-if __name__ == "__main__":
-    arg_array = sys.argv
-    client_nr = arg_array[1]
+PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
+DATA_FOLDER = Path(PROJECT_ROOT / "tests" / "test_data" / "dementia_v_0_1")
 
-    data_filename = '../../../tests/test_data/dementia_v_0_1/ppmi' + str(int(client_nr) + 2) + '.csv'
+if __name__ == "__main__":
     xvars = ['lefthippocampus', 'leftamygdala']
     yvars = ['gender']
 
-    if client_nr == 0:
-        datasets = [i for i in range(5)]
-    else:
-        datasets = [i for i in range(5, 10)]
-
     dataframes_list = []
-    for i in datasets:
-        curr_filename = '../../../tests/test_data/dementia_v_0_1/ppmi' + str(i) + '.csv'
-        curr_df = pd.read_csv(curr_filename)
+    for file in glob.glob(os.path.join(DATA_FOLDER / "ppmi*.csv")):
+        curr_df = pd.read_csv(file)
         dataframes_list.append(curr_df)
 
     full_data = pd.concat(dataframes_list)

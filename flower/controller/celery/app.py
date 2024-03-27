@@ -9,7 +9,7 @@ from celery.result import AsyncResult
 from kombu import exceptions as kombu_exceptions
 
 from flower.utils import Singleton
-from flower.worker.celery_tasks.celery_config import get_celery_app
+from flower.celery_app_conf import get_celery_app
 
 
 class CeleryConnectionError(Exception):

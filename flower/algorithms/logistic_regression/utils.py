@@ -53,6 +53,7 @@ def set_initial_params(model: LogisticRegression):
     if model.fit_intercept:
         model.intercept_ = np.zeros((n_classes,))
 
+
 def partition(X: np.ndarray, y: np.ndarray, num_partitions: int) -> XYList:
     """Split X and y into a number of partitions."""
     return list(
