@@ -1,0 +1,613 @@
+{
+  "code": "Traumatic Brain Injury",
+  "groups": [
+    {
+      "code": "Demographics",
+      "groups": [],
+      "label": "Demographics",
+      "variables": [
+        {
+          "code": "subjectcode",
+          "isCategorical": false,
+          "label": "subjectcode",
+          "sql_type": "text",
+          "type": "text"
+        },
+        {
+          "code": "age_value",
+          "isCategorical": false,
+          "label": "Age",
+          "maxValue": "130",
+          "minValue": "0",
+          "sql_type": "int",
+          "type": "integer"
+        },
+        {
+          "code": "gender_type",
+          "enumerations": [
+            {
+              "code": "M",
+              "label": "Male"
+            },
+            {
+              "code": "F",
+              "label": "Female"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Gender",
+          "sql_type": "text",
+          "type": "nominal"
+        }
+      ]
+    },
+    {
+      "code": "Neurological Assessment",
+      "groups": [],
+      "label": "Neurological Assessment",
+      "variables": [
+        {
+          "code": "gcs_eye_response_scale",
+          "description": "Glasgow Coma Scale (GCS) - eye response scale",
+          "enumerations": [
+            {
+              "code": "Untestable",
+              "label": "Untestable"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            },
+            {
+              "code": "1",
+              "label": "No eye opening"
+            },
+            {
+              "code": "2",
+              "label": "Eye opening to pain"
+            },
+            {
+              "code": "3",
+              "label": "Eye opening to speech/verbal command"
+            },
+            {
+              "code": "4",
+              "label": "Eyes open spontaneously"
+            }
+          ],
+          "isCategorical": true,
+          "label": "GCS eye",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "gcs_motor_response_scale",
+          "description": "Glasgow Coma Scale (GCS) - motor response scale",
+          "enumerations": [
+            {
+              "code": "Untestable",
+              "label": "Untestable"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            },
+            {
+              "code": "1",
+              "label": "No motor response"
+            },
+            {
+              "code": "2",
+              "label": "Abnormal extension/Extensor response"
+            },
+            {
+              "code": "3",
+              "label": "Abnormal flexion"
+            },
+            {
+              "code": "4",
+              "label": "Flexion withdrawal/withdraws from pain"
+            },
+            {
+              "code": "5",
+              "label": "Localizes pain"
+            },
+            {
+              "code": "6",
+              "label": "Obeys command"
+            }
+          ],
+          "isCategorical": true,
+          "label": "GCS motor",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "gcs_verbal_response_scale",
+          "description": "Glasgow Coma Scale (GCS) - verbal response scale",
+          "enumerations": [
+            {
+              "code": "Untestable",
+              "label": "Untestable"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            },
+            {
+              "code": "1",
+              "label": "No verbal response/sounds"
+            },
+            {
+              "code": "2",
+              "label": "Incomprehensible sound"
+            },
+            {
+              "code": "3",
+              "label": "Inappropriate words"
+            },
+            {
+              "code": "4",
+              "label": "Confused"
+            },
+            {
+              "code": "5",
+              "label": "Oriented"
+            }
+          ],
+          "isCategorical": true,
+          "label": "GCS verbal",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "pupil_reactivity_right_eye_result",
+          "description": "Pupil reactivity light right eye",
+          "enumerations": [
+            {
+              "code": "Sluggish",
+              "label": "Sluggish"
+            },
+            {
+              "code": "Nonreactive",
+              "label": "Nonreactive"
+            },
+            {
+              "code": "Brisk",
+              "label": "Brisk"
+            },
+            {
+              "code": "Untestable",
+              "label": "Untestable"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Pupil right",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "pupil_reactivity_left_eye_result",
+          "description": "Pupil reactivity light left eye ",
+          "enumerations": [
+            {
+              "code": "Sluggish",
+              "label": "Sluggish"
+            },
+            {
+              "code": "Nonreactive",
+              "label": "Nonreactive"
+            },
+            {
+              "code": "Brisk",
+              "label": "Brisk"
+            },
+            {
+              "code": "Untestable",
+              "label": "Untestable"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Pupil left",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "gcs_total_score",
+          "description": "Glasgow Coma Scale (GCS) - total score",
+          "enumerations": [
+            {
+              "code": "3",
+              "label": "3"
+            },
+            {
+              "code": "4",
+              "label": "4"
+            },
+            {
+              "code": "5",
+              "label": "5"
+            },
+            {
+              "code": "6",
+              "label": "6"
+            },
+            {
+              "code": "7",
+              "label": "7"
+            },
+            {
+              "code": "8",
+              "label": "8"
+            },
+            {
+              "code": "9",
+              "label": "9"
+            },
+            {
+              "code": "10",
+              "label": "10"
+            },
+            {
+              "code": "11",
+              "label": "11"
+            },
+            {
+              "code": "12",
+              "label": "12"
+            },
+            {
+              "code": "13",
+              "label": "13"
+            },
+            {
+              "code": "14",
+              "label": "14"
+            },
+            {
+              "code": "15",
+              "label": "15"
+            },
+            {
+              "code": "untestable",
+              "label": "untestable"
+            },
+            {
+              "code": "unknown",
+              "label": "unknown"
+            }
+          ],
+          "isCategorical": true,
+          "label": "GSC total",
+          "sql_type": "text",
+          "type": "nominal"
+        }
+      ]
+    },
+    {
+      "code": "Imaging Assessment",
+      "groups": [],
+      "label": "Imaging Assessment",
+      "variables": [
+        {
+          "code": "cisternal_compression_status",
+          "description": "Cisternal compression status",
+          "enumerations": [
+            {
+              "code": "Present",
+              "label": "Present"
+            },
+            {
+              "code": "Absent",
+              "label": "Absent"
+            },
+            {
+              "code": "Indeterminate",
+              "label": "Indeterminate"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Cisternal compression",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "epidural_hematoma_anatomic_status",
+          "description": "Epidural hematoma status",
+          "enumerations": [
+            {
+              "code": "Present",
+              "label": "Present"
+            },
+            {
+              "code": "Absent",
+              "label": "Absent"
+            },
+            {
+              "code": "Indeterminate",
+              "label": "Indeterminate"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Epidural hematoma",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "midline_shift_supratentorial_indicator",
+          "description": "Midline shift supratentorial indicator",
+          "enumerations": [
+            {
+              "code": "Present",
+              "label": "Present"
+            },
+            {
+              "code": "Absent",
+              "label": "Absent"
+            },
+            {
+              "code": "Indeterminate",
+              "label": "Indeterminate"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Midline shift",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "marshall_ct_classification_code",
+          "description": "Marshall CT classification code",
+          "enumerations": [
+            {
+              "code": "1",
+              "label": "Diffuse injury NVP"
+            },
+            {
+              "code": "2",
+              "label": "Diffuse injury"
+            },
+            {
+              "code": "3",
+              "label": "Diffuse injury with swelling"
+            },
+            {
+              "code": "4",
+              "label": "Diffuse injury with shift"
+            },
+            {
+              "code": "5",
+              "label": "Mass lesions"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Marshall CT",
+          "sql_type": "text",
+          "type": "nominal"
+        }
+      ]
+    },
+    {
+      "code": "Systemic Second Insult",
+      "groups": [],
+      "label": "Systemic Second Insult",
+      "variables": [
+        {
+          "code": "hypoxic_episode_indicator",
+          "description": "Hypoxic episode indicator",
+          "enumerations": [
+            {
+              "code": "Yes",
+              "label": "Yes"
+            },
+            {
+              "code": "No",
+              "label": "No"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            },
+            {
+              "code": "Suspected",
+              "label": "Suspected"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Hypoxia",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "hypotensive_episode_indicator",
+          "description": "Hypotensive episode indicator",
+          "enumerations": [
+            {
+              "code": "Yes",
+              "label": "Yes"
+            },
+            {
+              "code": "No",
+              "label": "No"
+            },
+            {
+              "code": "Unknown",
+              "label": "Unknown"
+            },
+            {
+              "code": "Suspected",
+              "label": "Suspected"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Hypotension",
+          "sql_type": "text",
+          "type": "nominal"
+        }
+      ]
+    },
+    {
+      "code": "Outcomes",
+      "groups": [],
+      "label": "Outcomes",
+      "variables": [
+        {
+          "code": "gose_score",
+          "description": "Glasgow Outcome Scale Extended (GOS-E) - score",
+          "enumerations": [
+            {
+              "code": "1",
+              "label": "Dead"
+            },
+            {
+              "code": "2",
+              "label": "Vegetative State"
+            },
+            {
+              "code": "3",
+              "label": "Lower Severe Disability"
+            },
+            {
+              "code": "4",
+              "label": "Upper Severe Disability"
+            },
+            {
+              "code": "5",
+              "label": "Lower Moderate Disability"
+            },
+            {
+              "code": "6",
+              "label": "Upper Moderate Disability"
+            },
+            {
+              "code": "7",
+              "label": "Lower Good Recovery "
+            },
+            {
+              "code": "8",
+              "label": "Upper Good Recovery"
+            }
+          ],
+          "isCategorical": true,
+          "label": "GOS-E score",
+          "sql_type": "text",
+          "type": "nominal"
+        },
+        {
+          "code": "mortality_core",
+          "description": "6 month predicted mortality; LPcore, mortality = \u22122.55 + 0.275 \u00d7 sum score core",
+          "isCategorical": false,
+          "label": "Mortality - Core Impact",
+          "sql_type": "real",
+          "type": "real"
+        },
+        {
+          "code": "mortality_gose",
+          "description": "Observed mortality by Glasgow output score",
+          "enumerations": [
+            {
+              "code": "1",
+              "label": "Dead"
+            },
+            {
+              "code": "0",
+              "label": "Alive"
+            }
+          ],
+          "isCategorical": true,
+          "label": "Mortality - GOS-E ",
+          "sql_type": "text",
+          "type": "nominal"
+        }
+      ]
+    },
+    {
+      "code": "Laboratory Tests",
+      "groups": [],
+      "label": "Laboratory Tests",
+      "variables": [
+        {
+          "code": "laboratory_procedure_glucose_value",
+          "description": "Laboratory procedure glucose value",
+          "isCategorical": false,
+          "label": "Glucose",
+          "maxValue": "36.0",
+          "minValue": "1.54",
+          "sql_type": "real",
+          "type": "real"
+        },
+        {
+          "code": "laboratory_procedure_hemoglobin_value",
+          "description": "Laboratory procedure hemoglobin value ",
+          "isCategorical": false,
+          "label": "Hemoglobin",
+          "maxValue": "18.0",
+          "minValue": "3.4",
+          "sql_type": "real",
+          "type": "real"
+        }
+      ]
+    }
+  ],
+  "label": "Traumatic Brain Injury",
+  "variables": [
+    {
+      "code": "dataset",
+      "enumerations": [
+        {
+          "code": "dummy_tbi0",
+          "label": "Dummy TBI_0"
+        },
+        {
+          "code": "dummy_tbi1",
+          "label": "Dummy TBI_1"
+        },
+        {
+          "code": "dummy_tbi2",
+          "label": "Dummy TBI_2"
+        },
+        {
+          "code": "dummy_tbi3",
+          "label": "Dummy TBI_3"
+        },
+        {
+          "code": "dummy_tbi4",
+          "label": "Dummy TBI_4"
+        },
+        {
+          "code": "dummy_tbi5",
+          "label": "Dummy TBI_5"
+        },
+        {
+          "code": "dummy_tbi6",
+          "label": "Dummy TBI_6"
+        },
+        {
+          "code": "dummy_tbi7",
+          "label": "Dummy TBI_7"
+        },
+        {
+          "code": "dummy_tbi8",
+          "label": "Dummy TBI_8"
+        },
+        {
+          "code": "dummy_tbi9",
+          "label": "Dummy TBI_9"
+        }
+      ],
+      "isCategorical": true,
+      "label": "Dataset",
+      "sql_type": "text",
+      "type": "nominal"
+    }
+  ],
+  "version": "to be defined"
+}
