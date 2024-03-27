@@ -1,13 +1,16 @@
 # app.py
 from flask import Flask
-from flower.worker.celery_tasks.tasks import print_hello
+
+from flower.central_node.celery.node_tasks_handler import NodeAlgorithmTasksHandler
 
 app = Flask(__name__)
 
 
 @app.route('/run_algorithm')
 def run_algorithm():
-    print_hello.delay()
+    task_handlers = [NodeAlgorithmTasksHandler(port) for port in ["5671", "5672"]]
+    for task_handler in task_handlers:
+        task_handler.print_hello()
     return "Hello World task has been enqueued!"
 
 
